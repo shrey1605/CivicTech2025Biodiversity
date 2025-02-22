@@ -1,0 +1,28 @@
+{
+    kingdom: {
+        phylum: {
+            class: {
+                order: {
+                    family: {
+                        genus: {
+                            species1: {
+                                ...
+                                text: "Response of LLM AI"
+                                occurences: 30
+                            }
+                        },
+                        genus: {
+                            species1: {
+                                ...
+                                occurences: 40
+                            }
+                        },
+                    }
+                }
+            }
+        }
+    },
+    kingdon2: {
+        ,
+    }
+}
