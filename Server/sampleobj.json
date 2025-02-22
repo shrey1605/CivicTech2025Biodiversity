@@ -2,7 +2,8 @@
     "genuses": [
       {
         "name": "Genus1",
-        "subgenera": [
+        "occurenceTotalGenus": 290,
+        "subgenena": [
           {
             "name": "Subgenus1A",
             "occurrences": 125,
@@ -25,7 +26,8 @@
       },
       {
         "name": "Genus2",
-        "subgenera": [
+        "occurenceTotalGenus": 166,
+        "subgenena": [
           {
             "name": "Subgenus2A",
             "occurrences": 90,
