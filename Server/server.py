@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile
 import uvicorn
 from llm import get_sub_species_info_from_LLM
+from getInfo import func
 
 app = FastAPI()
 
@@ -10,24 +11,19 @@ app = FastAPI()
 def hello(name: str = ""):
     return {"message": f"Hello, this is our civic tech project"}
 
-# expecting the following json doc
-# {
-#     location: "Boston"
-# }
+
 @app.post("/getInfo/")
 async def getInfo():
+    data = func()
+    
     # Get all the info for genuses/all that shit for that location from
     # the herbarium dataset csv file
-
-    # we basically assign random occurrence values for each genus/sub-genus we get
 
     # Now, we have a list of genus/sub-genus. Pick the top 5, then use any LLM AI API
     # get all the information about that. pack it in to the json object
     # textOfThatSubSpecies = get_sub_species_info_from_LLM(sub_species_name)
 
     # return that object
-    
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
