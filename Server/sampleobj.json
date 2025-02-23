@@ -1,28 +1,46 @@
 {
-    kingdom: {
-        phylum: {
-            class: {
-                order: {
-                    family: {
-                        genus: {
-                            species1: {
-                                ...
-                                text: "Response of LLM AI"
-                                occurences: 30
-                            }
-                        },
-                        genus: {
-                            species1: {
-                                ...
-                                occurences: 40
-                            }
-                        },
-                    }
-                }
-            }
-        }
-    },
-    kingdon2: {
-        ,
-    }
+    "genuses": [
+      {
+        "name": "Genus1",
+        "occurenceTotalGenus": 290,
+        "subgenena": [
+          {
+            "name": "Subgenus1A",
+            "occurrences": 125,
+            "distribution": "North America",
+            "description": "A common subgenus found in temperate forests."
+          },
+          {
+            "name": "Subgenus1B",
+            "occurrences": 98,
+            "distribution": "Europe",
+            "description": "Thrives in humid environments with rich soil."
+          },
+          {
+            "name": "Subgenus1C",
+            "occurrences": 67,
+            "distribution": "Asia",
+            "description": "Often found in mountainous regions with cold climates."
+          }
+        ]
+      },
+      {
+        "name": "Genus2",
+        "occurenceTotalGenus": 166,
+        "subgenena": [
+          {
+            "name": "Subgenus2A",
+            "occurrences": 90,
+            "distribution": "Africa",
+            "description": "Known for its resilience in dry climates."
+          },
+          {
+            "name": "Subgenus2B",
+            "occurrences": 76,
+            "distribution": "Europe",
+            "description": "Often found in wetland habitats."
+          }
+        ]
+      }
+    ]
 }
