@@ -1,7 +1,10 @@
 import google.generativeai as gen_ai # imports the google library with generativeai as gen_ai
 
-# configures the api_key AIzaSyAPKN68FAAmwhlkkh3firvHuoMGLC_AgaU using genai with the configure command 
-gen_ai.configure(api_key = "AIzaSyAPKN68FAAmwhlkkh3firvHuoMGLC_AgaU")
+with open("key.txt", 'r') as file:
+    API_KEY = file.read()
+
+# configures the api_key using genai with the configure command 
+gen_ai.configure(api_key = API_KEY)
 
 
 # function header for the get_sub_species_info_from_LLM with the parameter species_info 

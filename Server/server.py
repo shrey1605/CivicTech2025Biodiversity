@@ -1,40 +1,21 @@
 from fastapi import FastAPI, UploadFile
 import uvicorn
 from llm import get_sub_species_info_from_LLM
-from getInfo import func
+from getinfo2 import func1
 
 app = FastAPI()
-
 
 # routes
 @app.get("/hello")
 def hello(name: str = ""):
     return {"message": f"Hello, this is our civic tech project"}
 
-
 @app.post("/getInfo/")
-async def getInfo():
-    data = func()
-    
-    # Get all the info for genuses/all that shit for that location from
-    # the herbarium dataset csv file
-
-    # Now, we have a list of genus/sub-genus. Pick the top 5, then use any LLM AI API
-    # get all the information about that. pack it in to the json object
-    # textOfThatSubSpecies = get_sub_species_info_from_LLM(sub_species_name)
-
-    # return that object
+async def getInfo(stateProvince: list[str] = [], 
+                  county: list[str] = [],
+                  locality: list[str] = [],
+                  municipality: list[str] = []):
+    return func1(stateProvince, county, locality, municipality)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
-
-
-
-# The flow goes like
-# first we perform ocr on the given image
-# we get all the text in that image from that OCR analysis. We also get bounding box data
-# we then send this text to some LLM to extract words worth listing meaning for
-# we get a list of words and their meanings back from that LLM
-# Now we use oxford and other reliable dictionaries to get word meanings
-# we then package all this together and send it to the front-end

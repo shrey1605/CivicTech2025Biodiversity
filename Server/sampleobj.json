@@ -8,19 +8,22 @@
             "name": "Subgenus1A",
             "occurrences": 125,
             "distribution": "North America",
-            "description": "A common subgenus found in temperate forests."
+            "description": "A common subgenus found in temperate forests.",
+            "imgUrl": "sflsjfalsfhskdjfhksdhfkjshkh"
           },
           {
             "name": "Subgenus1B",
             "occurrences": 98,
             "distribution": "Europe",
-            "description": "Thrives in humid environments with rich soil."
+            "description": "Thrives in humid environments with rich soil.",
+            "imgUrl": "sflsjfalsfhskdjfhksdhfkjshkh"
           },
           {
             "name": "Subgenus1C",
             "occurrences": 67,
             "distribution": "Asia",
-            "description": "Often found in mountainous regions with cold climates."
+            "description": "Often found in mountainous regions with cold climates.",
+            "imgUrl": "sflsjfalsfhskdjfhksdhfkjshkh"
           }
         ]
       },
@@ -32,13 +35,15 @@
             "name": "Subgenus2A",
             "occurrences": 90,
             "distribution": "Africa",
-            "description": "Known for its resilience in dry climates."
+            "description": "Known for its resilience in dry climates.",
+            "imgUrl": "sflsjfalsfhskdjfhksdhfkjshkh"
           },
           {
             "name": "Subgenus2B",
             "occurrences": 76,
             "distribution": "Europe",
-            "description": "Often found in wetland habitats."
+            "description": "Often found in wetland habitats.",
+            "imgUrl": "sflsjfalsfhskdjfhksdhfkjshkh"
           }
         ]
       }
