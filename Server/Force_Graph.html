@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Directed Graph</title>
+    <style>
+        body { margin: 0; }
+        #3d-graph { width: 100vw; height: 100vh; }
+        
+        /* Pop-up styling */
+        .popup {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            max-width: 400px;
+        }
+        .popup img {
+            width: 100px;
+            height: 100px;
+            margin-right: 15px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .popup.show {
+            display: flex;
+        }
+    </style>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+</head>
+<body>
+    <div id="3d-graph"></div>
+    <div id="popup" class="popup"></div>
+    
+    <script>
+        // Sample dataset with multiple genera and subgenera
+        const data = { "genuses": [] };
+
+        // Example of generating multiple genera dynamically
+        for (let i = 1; i <= 10; i++) {
+            let genus = {
+                "name": `Genus${i}`,
+                "occurenceTotalGenus": Math.floor(Math.random() * 100) + 50,
+                "subgenena": []
+            };
+
+            // Generate subgenera for each genus
+            for (let j = 1; j <= 5; j++) {
+                genus.subgenena.push({
+                    "name": `Genus${i}-Subgenus${j}`,
+                    "occurrences": Math.floor(Math.random() * 50) + 10,
+                    "distribution": ["North America", "Europe", "Asia", "Africa", "Australia"][Math.floor(Math.random() * 5)],
+                    "description": `A subgenus of Genus${i}, commonly found in various regions.`,
+                    "image": `https://example.com/image${i}${j}.jpg`
+                });
+            }
+            data.genuses.push(genus);
+        }
+
+        // Prepare the graph data
+        const gData = { nodes: [], links: [] };
+
+        // Add nodes for each genus and subgenus dynamically
+        data.genuses.forEach((genus) => {
+            gData.nodes.push({ id: genus.name, group: 'genus', info: `Total Occurrences: ${genus.occurenceTotalGenus}`, image: "" });
+            genus.subgenena.forEach((subgenus) => {
+                const subgenusId = `${genus.name}-${subgenus.name}`;
+                gData.nodes.push({ 
+                    id: subgenusId, 
+                    group: 'subgenus',
+                    info: `Occurrences: ${subgenus.occurrences}<br>Distribution: ${subgenus.distribution}<br>Description: ${subgenus.description}`,
+                    image: subgenus.image || "https://example.com/default.jpg"
+                });
+                gData.links.push({ source: genus.name, target: subgenusId });
+            });
+        });
+
+        // Create the graph
+        const Graph = new ForceGraph3D(document.getElementById('3d-graph'))
+            .graphData(gData)
+            .nodeAutoColorBy('group') // Color nodes by group
+            .nodeLabel(node => node.id)
+            .onNodeClick(node => {
+                const popup = document.getElementById('popup');
+                popup.innerHTML = `
+                    <img src="${node.image}" alt="${node.id}" onerror="this.src='https://example.com/default.jpg'">
+                    <div class="popup-content">
+                        <strong>${node.id}</strong><br>${node.info}
+                    </div>
+                `;
+                popup.classList.add('show');
+
+                // Hide the popup after 3 seconds
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                }, 3000);
+            })
+            .d3Force('link').distance(30); // Reduce distance between nodes further
+    </script>
+</body>
+</html>

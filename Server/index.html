@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Directed Graph</title>
+    <style>
+        body { margin: 0; }
+        #3d-graph { width: 100vw; height: 100vh; }
+    </style>
+    <script src="https://unpkg.com/3d-force-graph"></script>
+</head>
+<body>
+    <div id="3d-graph"></div>
+    <script>
+        const data = {
+            "genuses": [
+                {
+                    "name": "Genus1",
+                    "occurenceTotalGenus": 290,
+                    "subgenena": [
+                        {
+                            "name": "Subgenus1A",
+                            "occurrences": 125,
+                            "distribution": "North America",
+                            "description": "A common subgenus found in temperate forests."
+                        },
+                        {
+                            "name": "Subgenus1B",
+                            "occurrences": 98,
+                            "distribution": "Europe",
+                            "description": "Thrives in humid environments with rich soil."
+                        },
+                        {
+                            "name": "Subgenus1C",
+                            "occurrences": 67,
+                            "distribution": "Asia",
+                            "description": "Often found in mountainous regions with cold climates."
+                        },
+                        {
+                            "name": "Subgenus1D",
+                            "occurrences": 50,
+                            "distribution": "Australia",
+                            "description": "Found in dry eucalyptus forests."
+                        }
+                    ]
+                },
+                {
+                    "name": "Genus2",
+                    "occurenceTotalGenus": 166,
+                    "subgenena": [
+                        {
+                            "name": "Subgenus2A",
+                            "occurrences": 90,
+                            "distribution": "Africa",
+                            "description": "Known for its resilience in dry climates."
+                        },
+                        {
+                            "name": "Subgenus2B",
+                            "occurrences": 76,
+                            "distribution": "Europe",
+                            "description": "Often found in wetland habitats."
+                        },
+                        {
+                            "name": "Subgenus2C",
+                            "occurrences": 40,
+                            "distribution": "Asia",
+                            "description": "Common in tropical regions."
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // Prepare the graph data
+        const gData = {
+            nodes: [],
+            links: []
+        };
+
+        // Add nodes for each genus
+        data.genuses.forEach((genus) => {
+            gData.nodes.push({ id: genus.name, group: 'genus' });
+            genus.subgenena.forEach((subgenus) => {
+                const subgenusId = `${genus.name}-${subgenus.name}`;
+                gData.nodes.push({ id: subgenusId, group: 'subgenus' });
+                gData.links.push({ source: genus.name, target: subgenusId });
+            });
+        });
+
+        // Create the graph
+        const Graph = new ForceGraph3D(document.getElementById('3d-graph'))
+            .graphData(gData)
+            .nodeAutoColorBy('group') // Color nodes by group
+            .nodeLabel(node => node.id); // Show node labels
+    </script>
+</body>
+</html>
